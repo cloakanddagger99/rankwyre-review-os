@@ -329,17 +329,20 @@ function LandingPage() {
                 name: 'Starter',
                 price: '$99',
                 features: ['1 location', 'Google reviews', 'Basic analytics', 'Email support'],
+                paymentLink: 'https://buy.stripe.com/cNibJ0ba52S9d741tG3sI0d',
               },
               {
                 name: 'Professional',
                 price: '$199',
                 features: ['Up to 5 locations', 'Google + Yelp', 'AI responses', 'SMS campaigns', 'Priority support'],
                 highlighted: true,
+                paymentLink: 'https://buy.stripe.com/cNidR87XT9gxaYWa0c3sI0e',
               },
               {
                 name: 'Enterprise',
                 price: 'Custom',
                 features: ['Unlimited locations', 'All platforms', 'Custom integrations', 'Dedicated support'],
+                paymentLink: null,
               },
             ].map((plan, i) => (
               <motion.div
@@ -362,12 +365,24 @@ function LandingPage() {
                       </li>
                     ))}
                   </ul>
-                  <Button
-                    className={`w-full ${plan.highlighted ? 'bg-[#001F4D] hover:bg-[#0A2D66]' : 'border-[#001F4D] text-[#001F4D]'}`}
-                    variant={plan.highlighted ? 'default' : 'outline'}
-                  >
-                    Get Started
-                  </Button>
+                  {plan.paymentLink ? (
+                    <a href={plan.paymentLink} target="_blank" rel="noopener noreferrer" className="block">
+                      <Button
+                        className={`w-full ${plan.highlighted ? 'bg-[#001F4D] hover:bg-[#0A2D66]' : 'border-[#001F4D] text-[#001F4D]'}`}
+                        variant={plan.highlighted ? 'default' : 'outline'}
+                      >
+                        Start Free Trial
+                      </Button>
+                    </a>
+                  ) : (
+                    <Button
+                      className="w-full border-[#001F4D] text-[#001F4D]"
+                      variant="outline"
+                      onClick={() => window.location.href = 'mailto:sales@rankwyre.com'}
+                    >
+                      Contact Sales
+                    </Button>
+                  )}
                 </Card>
               </motion.div>
             ))}
